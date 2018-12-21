@@ -4,15 +4,19 @@ const host = '10.39.128.102';
 const Redis = require('ioredis');
 const redis = new Redis(port, host);
 
-redis.on('message', (channel, message) => {
-    console.log(`Received the following message from ${channel}: ${message}`);
-});
-
 const channel = 'garageDoor';
 
-redis.subscribe(channel, (error, count) => {
-    if (error) {
-        throw new Error(error);
-    }
-    console.log(`Subscribed to ${count} channel. Listening for updates on the ${channel} channel.`);
-});
+const sleep = sec => new Promise(resolve => setTimeout(resolve, sec * 1000));
+
+async function main() {
+    console.log('Started garage door publisher...')
+    // Sleep 4 seconds and then publish garage door "opened" event.
+    await sleep(4);
+    pub.publish(channel, 'opened');
+
+    await sleep(7);
+    pub.publish(channel, 'closed');
+    pub.disconnect();
+}
+
+main();
