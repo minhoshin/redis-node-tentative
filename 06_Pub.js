@@ -1,6 +1,8 @@
-const Redis = require('ioredis');
+const port = 6379;
+const host = '10.39.128.102';
 
-const redis = new Redis();
+const Redis = require('ioredis');
+const redis = new Redis(port, host);
 
 redis.on('message', (channel, message) => {
     console.log(`Received the following message from ${channel}: ${message}`);
