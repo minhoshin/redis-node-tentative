@@ -1,6 +1,8 @@
-const Redis = require('ioredis');
+const port = 6379;
+const host = '10.39.128.102';
 
-const redis = new Redis();
+const Redis = require('ioredis');
+const redis = new Redis(port, host);
 
 async function main() {
     const key = 'cat';
