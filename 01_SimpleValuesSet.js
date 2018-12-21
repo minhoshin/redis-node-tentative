@@ -13,4 +13,6 @@ async function main() {
     redis.disconnect();
 }
 
+redis.connect(() => console.log('Connected to Redis server'));
+
 main();
